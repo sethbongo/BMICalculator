@@ -1,5 +1,6 @@
 package com.example.activity2;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         btn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
             public void onClick(View view) {
 
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String cat = BMICalculator.category(bmi);
 
-                    result.setText(String.format("%.2f", bmi));
+                    result.setText(String.format(("%.5f"), bmi));
                     category.setText(cat);
 
                 }else{
