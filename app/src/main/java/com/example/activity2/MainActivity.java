@@ -16,6 +16,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
 
+
+    TextView loseWeight;
+    TextView gainWeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         EditText height = findViewById(R.id.height);
         EditText result = findViewById(R.id.bmi_result);
         TextView category = findViewById(R.id.textView4);
+        loseWeight = findViewById(R.id.lose_weight);
+        gainWeight = findViewById(R.id.gain_weight);
         Button btn = findViewById(R.id.button);
 
 
@@ -48,17 +54,22 @@ public class MainActivity extends AppCompatActivity {
                     float fweight = Float.parseFloat(weightInput);
                     float fheight = Float.parseFloat(heightInput);
 
-                    float bmi = BMICalculator.calculate_bmi(fweight, fheight);
+
+                    BMICalculator BMIInstance = new BMICalculator(fheight, fweight);
+                    float bmi = BMIInstance.calculate_bmi();
 
                     if (bmi == -1){
                         category.setText("Invalid!");
                         return;
                     }
 
-                    String cat = BMICalculator.category(bmi);
-
+                    String cate = BMIInstance.category(bmi);
+////
                     result.setText(String.format(("%.5f"), bmi));
-                    category.setText(cat);
+                    category.setText(cate);
+
+                    loseWeight.setText(BMIInstance.getLowerBMI());
+                    gainWeight.setText(BMIInstance.getHigherBMI());
 
                 }else{
                     category.setText("Invalid Input! Try Again");
